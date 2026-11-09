@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- Plugin data API in `ReCoPa.Plugins`: `DataPacket`, `DataQuery`, `IDataAccess`, `IDataStore`, `IDataConsumer` and `IDataAccessConsumer`. Plugin components can receive live socket events and query a rolling store of recent events.
+- `DataHub` in the host keeps the last 10,000 received events and passes them to every plugin component that implements `IDataConsumer` or `IDataAccessConsumer`.
+- The xAPI plugins Activity Pulse, Focus Distribution, Task State and xAPI Preview show live statements (`XApiStatementParser`).
+- `ReCoPa.Plugins/README.md`: guide for writing plugins.
+- Architecture decision records in `docs/adr/` (0001-0008).
+- The `hello` frame is parsed into `ClientHello` (session ID, headers, meta) and raised as `SocketServerHost.ClientHello`. The connection keeps the client's session ID in `ClientSessionId`.
+- The sidebar button starts and stops the eye calibration (`calibration:start`, `calibration:stop`) and shows its state from `isCalibrating`.
+
+### Changed
+- Session tabs are named after the client's session ID instead of its endpoint. Connect and disconnect toasts show the session ID.
+- Closing a session tab saves the session and marks it as closed, so it is not restored at the next start.
+- The eye calibration controls follow `isCalibratable` from the tracking metadata. `isCalibrated` is still read when `isCalibratable` is missing.
+
+### Fixed
+- The dashboard shows the empty state when no session view is selected, instead of an empty area.
+
 ## ReCoPa v0.0.1 (2026-02-05)
 
 ### Summary
